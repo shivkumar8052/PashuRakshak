@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PashuRakshak</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🐄 PashuRakshak</h1>
+        <p>Animal Health Surveillance System</p>
+    </header>
+
+
+    <main class="container">
+
+        <!-- Farmer Portal -->
+        <div class="card">
+
+            <h2>👨‍🌾 Farmer Portal</h2>
+
+            <p>
+                Register farmers, animals and report
+                animal health symptoms.
+            </p>
+
+            <a href="/farmer" class="btn">
+                Open Farmer Portal
+            </a>
+
+        </div>
+
+
+        <!-- Veterinary Dashboard -->
+        <div class="card">
+
+            <h2>👨‍⚕️ Veterinary Dashboard</h2>
+
+            <p>
+                Monitor animal health cases,
+                risk levels and village reports.
+            </p>
+
+            <a href="/dashboard" class="btn">
+                Open Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

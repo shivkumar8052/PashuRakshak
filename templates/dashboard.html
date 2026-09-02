@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Veterinary Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>👨‍⚕️ Veterinary Dashboard</h1>
+        <p>PashuRakshak</p>
+    </header>
+
+
+    <div class="dashboard">
+
+        <!-- Statistics -->
+        <div class="stats">
+
+            <div class="stat-card">
+                <h3>Total Animals</h3>
+                <strong>{{ total_animals }}</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Cases</h3>
+                <strong>{{ total_cases }}</strong>
+            </div>
+
+            <div class="stat-card high-card">
+                <h3>🔴 High Risk</h3>
+                <strong>{{ high_risk }}</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>🟡 Medium Risk</h3>
+                <strong>{{ medium_risk }}</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>🟢 Low Risk</h3>
+                <strong>{{ low_risk }}</strong>
+            </div>
+
+        </div>
+
+
+        <!-- Village-wise Cases -->
+        <div class="card">
+
+            <h2>🏘️ Village-wise Cases</h2>
+
+            <table>
+
+                <tr>
+                    <th>Village</th>
+                    <th>Cases</th>
+                </tr>
+
+                {% for village in village_cases %}
+
+                <tr>
+                    <td>{{ village["village"] }}</td>
+                    <td>{{ village["cases"] }}</td>
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="2">
+                        No cases reported yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+
+        <!-- Recent Reports -->
+        <div class="card">
+
+            <h2>🚨 Recent Reports</h2>
+
+            <table>
+
+                <tr>
+                    <th>Animal</th>
+                    <th>Village</th>
+                    <th>Risk</th>
+                    <th>Symptoms</th>
+                </tr>
+
+                {% for report in recent_reports %}
+
+                <tr>
+
+                    <td>
+                        {{ report["animal_id"] }}
+                    </td>
+
+                    <td>
+                        {{ report["village"] }}
+                    </td>
+
+                    <td>
+                        {{ report["risk_level"] }}
+                    </td>
+
+                    <td>
+                        {{ report["symptoms"] }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="4">
+                        No reports yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

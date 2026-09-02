@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report Symptoms</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🩺 Animal Health Report</h1>
+        <p>PashuRakshak</p>
+    </header>
+
+
+    <div class="container">
+
+        <!-- Animal Details -->
+        <div class="card">
+
+            <h2>{{ animal["animal_id"] }}</h2>
+
+            <p>
+                <strong>Type:</strong>
+                {{ animal["animal_type"] }}
+            </p>
+
+            <p>
+                <strong>Age:</strong>
+                {{ animal["age"] }} years
+            </p>
+
+            <p>
+                <strong>Gender:</strong>
+                {{ animal["gender"] }}
+            </p>
+
+            <p>
+                <strong>Village:</strong>
+                {{ animal["village"] }}
+            </p>
+
+        </div>
+
+
+        {% if not result %}
+
+        <!-- Symptoms Form -->
+        <div class="card">
+
+            <h2>Select Symptoms</h2>
+
+            <form
+                action="/submit-report/{{ animal['animal_id'] }}"
+                method="POST"
+            >
+
+                <label class="checkbox">
+                    <input
+                        type="checkbox"
+                        name="symptoms"
+                        value="Fever"
+                    >
+                    Fever
+                </label>
+
+
+                <label class="checkbox">
+                    <input
+                        type="checkbox"
+                        name="symptoms"
+                        value="Cough"
+                    >
+                    Cough
+                </label>
+
+
+                <label class="checkbox">
+                    <input
+                        type="checkbox"
+                        name="symptoms"
+                        value="Weakness"
+                    >
+                    Weakness
+                </label>
+
+
+                <label class="checkbox">
+                    <input
+                        type="checkbox"
+                        name="symptoms"
+                        value="Diarrhea"
+                    >
+                    Diarrhea
+                </label>
+
+
+                <label class="checkbox">
+                    <input
+                        type="checkbox"
+                        name="symptoms"
+                        value="Swelling"
+                    >
+                    Swelling
+                </label>
+
+
+                <label class="checkbox">
+                    <input
+                        type="checkbox"
+                        name="symptoms"
+                        value="Loss of Appetite"
+                    >
+                    Loss of Appetite
+                </label>
+
+
+                <label class="checkbox">
+                    <input
+                        type="checkbox"
+                        name="symptoms"
+                        value="Breathing Problem"
+                    >
+                    Breathing Problem
+                </label>
+
+
+                <button type="submit">
+                    Submit Report
+                </button>
+
+            </form>
+
+        </div>
+
+
+        {% else %}
+
+        <!-- Risk Result -->
+        <div class="card">
+
+            <h2>Risk Assessment</h2>
+
+
+            {% if risk == "High" %}
+
+            <div class="risk high">
+                🔴 HIGH RISK
+            </div>
+
+
+            {% elif risk == "Medium" %}
+
+            <div class="risk medium">
+                🟡 MEDIUM RISK
+            </div>
+
+
+            {% else %}
+
+            <div class="risk low">
+                🟢 LOW RISK
+            </div>
+
+            {% endif %}
+
+
+            <h3>Reported Symptoms</h3>
+
+            <ul>
+
+                {% for symptom in symptoms %}
+
+                <li>
+                    {{ symptom }}
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+
+            <p class="warning">
+                ⚠️ This is a preliminary surveillance alert,
+                not a veterinary diagnosis.
+            </p>
+
+
+            <a href="/dashboard" class="btn">
+                Open Dashboard
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>

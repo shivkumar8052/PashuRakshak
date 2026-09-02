@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Portal</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>👨‍🌾 Farmer Portal</h1>
+        <p>PashuRakshak</p>
+    </header>
+
+
+    <div class="container">
+
+        <!-- Register Farmer -->
+        <div class="card">
+
+            <h2>Register Farmer</h2>
+
+            <form action="/register-farmer" method="POST">
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Farmer Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="mobile"
+                    placeholder="Mobile Number"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="village"
+                    placeholder="Village"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="block"
+                    placeholder="Block"
+                >
+
+                <input
+                    type="text"
+                    name="district"
+                    placeholder="District"
+                >
+
+                <button type="submit">
+                    Register Farmer
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Registered Farmers -->
+        <div class="card">
+
+            <h2>Registered Farmers</h2>
+
+            {% for farmer in farmers %}
+
+            <div class="farmer-row">
+
+                <div>
+                    <strong>
+                        {{ farmer["name"] }}
+                    </strong>
+
+                    <p>
+                        Village: {{ farmer["village"] }}
+                    </p>
+                </div>
+
+                <a
+                    href="/animal/{{ farmer['id'] }}"
+                    class="btn"
+                >
+                    Manage Animals
+                </a>
+
+            </div>
+
+            {% else %}
+
+            <p>
+                No farmers registered yet.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Animal Registration</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🐄 Animal Registration</h1>
+        <p>PashuRakshak</p>
+    </header>
+
+
+    <div class="container">
+
+        <!-- Farmer Details -->
+        <div class="card">
+
+            <h2>Farmer Details</h2>
+
+            <p>
+                <strong>Name:</strong>
+                {{ farmer["name"] }}
+            </p>
+
+            <p>
+                <strong>Village:</strong>
+                {{ farmer["village"] }}
+            </p>
+
+        </div>
+
+
+        <!-- Register Animal -->
+        <div class="card">
+
+            <h2>Register New Animal</h2>
+
+            <form
+                action="/register-animal/{{ farmer['id'] }}"
+                method="POST"
+            >
+
+                <label>Animal Type</label>
+
+                <select name="animal_type" required>
+
+                    <option value="Cow">
+                        Cow
+                    </option>
+
+                    <option value="Buffalo">
+                        Buffalo
+                    </option>
+
+                    <option value="Goat">
+                        Goat
+                    </option>
+
+                    <option value="Sheep">
+                        Sheep
+                    </option>
+
+                </select>
+
+
+                <label>Age</label>
+
+                <input
+                    type="number"
+                    name="age"
+                    min="0"
+                    placeholder="Animal Age"
+                    required
+                >
+
+
+                <label>Gender</label>
+
+                <select name="gender" required>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+                    Register Animal
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Animal List -->
+        <div class="card">
+
+            <h2>My Animals</h2>
+
+            {% for animal in animals %}
+
+            <div class="animal-row">
+
+                <div>
+
+                    <strong>
+                        {{ animal["animal_id"] }}
+                    </strong>
+
+                    <p>
+                        {{ animal["animal_type"] }}
+                        •
+                        {{ animal["age"] }} years
+                    </p>
+
+                    <p>
+                        Gender: {{ animal["gender"] }}
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/report/{{ animal['animal_id'] }}"
+                    class="btn"
+                >
+                    Report Symptoms
+                </a>
+
+            </div>
+
+            {% else %}
+
+            <p>
+                No animals registered.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
